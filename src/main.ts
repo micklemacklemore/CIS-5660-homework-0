@@ -3,6 +3,7 @@ const Stats = require('stats-js');
 import * as DAT from 'dat.gui';
 import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
+import Cube from './geometry/Cube'
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
 import Camera from './Camera';
 import {setGL} from './globals';
@@ -17,6 +18,7 @@ const controls = {
 
 let icosphere: Icosphere;
 let square: Square;
+let cube: Cube; 
 let prevTesselations: number = 5;
 
 function loadScene() {
@@ -24,6 +26,8 @@ function loadScene() {
   icosphere.create();
   square = new Square(vec3.fromValues(0, 0, 0));
   square.create();
+  cube = new Cube(vec3.fromValues(0, 0, 0), 1); 
+  cube.create(); 
 }
 
 function main() {
@@ -75,10 +79,13 @@ function main() {
       prevTesselations = controls.tesselations;
       icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, prevTesselations);
       icosphere.create();
+      // square = new Square(vec3.fromValues(0, 0, 0)); 
+      // square.create(); 
     }
     renderer.render(camera, lambert, [
-      icosphere,
-      // square,
+      //icosphere,
+      //square,
+      cube
     ]);
     stats.end();
 
