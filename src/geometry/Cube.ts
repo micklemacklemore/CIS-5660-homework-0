@@ -18,6 +18,8 @@ class Cube extends Drawable {
     create(): void {
         const halfSize = this.size / 2;
 
+        // TODO: center doesn't do anything
+
         // Vertex positions for a cube
         this.positions = new Float32Array([
             // Front face
