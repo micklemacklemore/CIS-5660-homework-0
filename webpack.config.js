@@ -31,7 +31,7 @@ module.exports = {
       directory: path.join(__dirname, 'dist'),
     },
     client: {
-      overlay: true,
+      overlay: false,
     }
   },
 };
