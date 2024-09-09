@@ -53,9 +53,9 @@ void main()
     
     
     // vary vertex pos by time
-    modelposition.x *= 1.2 + 0.2 * sin(u_Time * 0.02); 
-    modelposition.y *= 1.2 + 0.2 * sin(u_Time * 0.02); 
-    modelposition.z *= 1.2 + 0.2 * sin(u_Time * 0.02); 
+    modelposition.xyz *= 1.2 + 0.3 * sin(u_Time * 0.02); 
+    //modelposition.y *= 1.2 + 0.2 * sin(u_Time * modelposition.x * 0.07); 
+    //modelposition.z *= 1.2 + 0.2 * sin(u_Time * 0.02); 
 
     fs_Pos = modelposition; 
 
