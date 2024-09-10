@@ -1,5 +1,13 @@
 # HW 0: Intro to Javascript and WebGL
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1492bd24-0244-422e-a3e0-6677621c1c3f">
+</p>
 
+This project was a crash course in TypeScript, WebGL and Github Pages / Actions, where I extend a simple object viewer to render fun 3D noise on a cube. 
+
+> *Below are the original assignment instructions.* 
+
+---
 <p align="center">
   <img width="360" height="360" src="https://user-images.githubusercontent.com/1758825/132532354-e3a45402-e484-499e-bfa7-2d73b9f2c946.png">
 </p>
@@ -24,17 +32,6 @@ Rather than cloning the homework repository, please __fork__ the code into your 
     a. Run `npm start` and then go to `localhost:5660` in your web browser
 
     b. Run `npm run build` and then go open `dist/index.html` in your web browser
-
-```powershell
-# configure fnm environment
-fnm env --use-on-cd | Out-String | Invoke-Expression
-# download and install Node.js
-fnm use --install-if-missing 20
-# verifies the right Node.js version is in the environment
-node -v # should print `v20.17.0`
-# verifies the right npm version is in the environment
-npm -v # should print `10.8.2`
-```
 
 ## Module Bundling
 One of the most important dependencies of our projects is [Webpack](https://webpack.js.org/concepts/). Webpack is a module bundler which allows us to write code in separate files and use `import`s and `export`s to load classes and functions for other files. It also allows us to preprocess code before compiling to a single file. We will be using [Typescript](https://www.typescriptlang.org/docs/home.html) for this course which is Javascript augmented with type annotations. Webpack will convert Typescript files to Javascript files on compilation and in doing so will also check for proper type-safety and usage. Read more about Javascript modules in the resources section below.
