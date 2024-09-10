@@ -1,5 +1,13 @@
 # HW 0: Intro to Javascript and WebGL
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1492bd24-0244-422e-a3e0-6677621c1c3f">
+</p>
 
+This project was a crash course in TypeScript, WebGL and Github Pages / Actions, where I extend a simple object viewer to render fun 3D noise on a cube. 
+
+> *Below are the original assignment instructions.* 
+
+--
 <p align="center">
   <img width="360" height="360" src="https://user-images.githubusercontent.com/1758825/132532354-e3a45402-e484-499e-bfa7-2d73b9f2c946.png">
 </p>
