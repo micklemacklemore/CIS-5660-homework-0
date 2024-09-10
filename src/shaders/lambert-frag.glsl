@@ -183,13 +183,7 @@ void main()
 {
      vec3 uvw = fs_Pos.xyz; 
 
-     // uv *= 40.;
-     // uv *= 20.; 
-
      vec3 color = vec3(fbm(uvw)); 
-     // color = vec3( fract(sin( 3340. * uvw.xy) * 23423.32), 2. ); 
-     //color = hash33(uvw); 
-     // color = step(0.5, color);
      color = remap(color, -1., 1., 0.0, 1.0);
      if (color.x > .4 && color.x < .8) {
           color.yz = vec2(0.); 
