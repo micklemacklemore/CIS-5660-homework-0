@@ -14,7 +14,8 @@ import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
 const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
-  color: [0, 83, 135, 1.0]
+  color: [100,166,255, 1.0],
+  color2: [187,225,198, 1.]
 };
 
 let icosphere: Icosphere;
@@ -45,6 +46,7 @@ function main() {
   gui.add(controls, 'tesselations', 0, 8).step(1);
   gui.add(controls, 'Load Scene');
   gui.addColor(controls, 'color'); 
+  gui.addColor(controls, 'color2'); 
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -89,7 +91,7 @@ function main() {
       //square,
       cube
     ],
-    controls.color);
+    controls.color, controls.color2);
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame

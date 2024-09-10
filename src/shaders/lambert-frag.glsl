@@ -12,6 +12,7 @@
 precision highp float;
 
 uniform vec4 u_Color; // The color with which to render this instance of geometry.
+uniform vec4 u_Color2; 
 uniform float u_Time; 
 
 // These are the interpolated values out of the rasterizer, so you can't know
@@ -132,12 +133,12 @@ float perlinNoise( in vec3 x )
            u.x*u.y*u.z*(-va+vb+vc-vd+ve-vf-vg+vh);
 }
 
-#define OCTAVES 16
-#define PERSISTANCE 0.5;
-#define LACUNARITY 2.0; 
+#define OCTAVES 9
+#define PERSISTANCE 0.1;
+#define LACUNARITY 5.0; 
 float fbm(vec3 position) {
-     float amplitude = 2.5; 
-     float frequency = 3.5; 
+     float amplitude = 3.5; 
+     float frequency = 1.5; 
      float total = 0.; 
 
      for (int i = 0; i < OCTAVES; ++i) {
@@ -149,7 +150,7 @@ float fbm(vec3 position) {
 }
 
 float turbulencefbm(vec3 p, int octaves, float persistance, float lacunarity) {
-     float amplitude = 35987.5; 
+     float amplitude = 2.5; 
      float frequency = 1.0; 
      float total = 0.0; 
      float normalization = 0.0; 
@@ -199,24 +200,39 @@ void main()
 
 #else
 
+vec3 drawMountains(vec3 background, vec3 mountainColor, vec3 coords)
+{
+     float y = fbm(vec3((coords.x + 3. + coords.z + .3) * 1.)) * .4; 
+     vec3 sdfMountain = coords - y;  
+
+     vec3 color = mix(mountainColor, background, smoothstep(0., .04, sdfMountain.y)); 
+     return color; 
+}
 
 void main() {
      vec3 uvw = fs_Pos.xyz; 
      vec3 color = vec3(1.); 
 
-     uvw *= 2.4; 
+     uvw *= 4.4; 
 
-     float noiseSample = turbulencefbm(uvw, 8, 0.5, 2.0); 
+     float noiseSample = turbulencefbm(uvw, 14, 0.7, 2.0); 
      
-     noiseSample = remap(noiseSample, -1., 1., -.0, 1.);
-     noiseSample = smoothstep(0.4, .6, noiseSample); 
-     noiseSample = clamp(noiseSample, 0., 1.); 
+     
+     noiseSample = 1. - noiseSample;
+     noiseSample = smoothstep(0.0, 1., noiseSample); 
+     //noiseSample = remap(-1., 1., 0., 1., noiseSample); 
+     //noiseSample = smoothstep(0.4, .6, noiseSample); 
+     //noiseSample = clamp(noiseSample, 0., 1.); 
 
-     vec3 basecolor = vec3(1.) - u_Color.xyz; 
-     noiseSample = 1. - noiseSample; 
+     vec3 basecolor = u_Color.xyz;
      
-     color -= basecolor * vec3(noiseSample); 
-    
+     color = mix(color, basecolor, noiseSample); 
+     color = mix(color, u_Color2.xyz, uvw.y); 
+
+     color = drawMountains(color, vec3(0.1), uvw); 
+     uvw.y += .3; 
+     uvw.x += 5.; 
+     color = drawMountains(color, vec3(0.05), uvw);
 
      out_Col = vec4(color, 1.);
 }
